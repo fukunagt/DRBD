@@ -55,4 +55,20 @@ static const struct block_device_operations drbd_ops = {
 - FIXME
 
 ### drbd_send_and_submit
-- FIXME
+1. spin_lock_irq
+1. submit_private_bio is not NULL.
+   1. [drbd_submit_req_private_bio](#drbd_submit_req_private_bio)
+1. m.bio is not NULL.
+   1. [complete_master_bio](#complete_master_bio)
+1. spin_unlock_irq
+
+### drbd_submit_req_private_bio
+1. get_ldev
+1. submit_bio_noacct
+1. put_ldev
+
+### complete_master_bio
+1. bio_data_dir
+1. [bio_endio](https://www.kernel.org/doc/htmldocs/filesystems/API-bio-endio.html)
+   - End I/O on the whole bio.
+1. dec_ap_bio
