@@ -72,3 +72,10 @@ static const struct block_device_operations drbd_ops = {
 1. [bio_endio](https://www.kernel.org/doc/htmldocs/filesystems/API-bio-endio.html)
    - End I/O on the whole bio.
 1. dec_ap_bio
+
+### drbd_create_device
+```c
+	device->md_io.page = alloc_page(GFP_KERNEL);
+	if (!device->md_io.page)
+		goto out_no_io_page;
+```
